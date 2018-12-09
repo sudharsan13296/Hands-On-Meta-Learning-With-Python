@@ -107,7 +107,7 @@ Towards the end of the book, we will be familiar with state of the art meta lear
 * 9.1. Task Agnostic Meta Learning
 * 9.2. TAML Algorithm
 * [9.3. Meta Imitation Learning](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/blob/master/09.%20Recent%20Advancements%20and%20Next%20Steps/9.3%20Meta%20Imitation%20Learning.ipynb)
-* 9.4 MIL Algorithm
+* 9.4  MIL Algorithm
 * 9.5. CACTUs
 * 9.6. Task Generation using CACTUs
 * 9.7. Learning to Learn in the Concept Space
