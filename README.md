@@ -15,7 +15,6 @@ Meta learning is an exhilarating research in machine learning which enables the 
 
 The book starts with explaining the fundamentals of meta learning and takes the readers to understand the concept of learning to learn. We will learn various one-shot learning algorithms like Siamese, prototypical, relation and memory-augmented networks by implementing them in TensorFlow and Keras. Going ahead we will dive into state of the art meta learning algorithms like MAML, Reptile, CAML and more. We will then explore how to learn quickly with meta SGD and how can we perform unsupervised learning using meta learning. We will also learn about recent trends in meta learning like adversarial meta learning, meta learning by Baldwin effect, continuous adaptation with meta learning, and many more.
 
-Towards the end of the book, we will be familiar with state of the art meta learning algorithms.
 
 
 ### [1. Introduction to Meta Learning](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/tree/master/01.%20Introduction%20to%20Meta%20Learning)
