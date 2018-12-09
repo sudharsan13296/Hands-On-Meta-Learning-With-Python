@@ -1,0 +1,360 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Building MAML From Scratch"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "In the last section we saw how MAML works. We saw how MAML obtains a better and robust model parameter $\\theta$ that is generalizable across tasks. \n",
+    "\n",
+    "\n",
+    "Now we will better understand MAML by coding them from scratch. For better understanding, we consider a simple binary classification task. We randomly generate our input data and we train them with a simple single layer neural network and try to find the optimal parameter theta. \n",
+    "\n",
+    "Now we will step by step how exacly we are doing this,\n",
+    "\n",
+    "First we import all the necessary libraries,"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Generate Data Points"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now we define a function called sample_points for generating our input (x,y) pairs. It takes the parameter k as an input which implies number of (x,y) pairs we want to sample. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "def sample_points(k):\n",
+    "    x = np.random.rand(k,50)\n",
+    "    y = np.random.choice([0, 1], size=k, p=[.5, .5]).reshape([-1,1])\n",
+    "    return x,y"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The above function returns output as follows, "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[0.537339   0.113621   0.62983308 0.3016117  0.91174146 0.95787598\n",
+      " 0.20520229 0.123301   0.64143809 0.68485511 0.29509309 0.65719205\n",
+      " 0.60906626 0.56890899 0.82614517 0.4408421  0.48018921 0.82674918\n",
+      " 0.37076319 0.56239926 0.47655734 0.16489053 0.79742579 0.57731408\n",
+      " 0.62065454 0.70110719 0.61330581 0.84084355 0.7967645  0.84148374\n",
+      " 0.04915798 0.31650656 0.64326928 0.20878387 0.29682973 0.34488916\n",
+      " 0.54626642 0.35608015 0.37950982 0.42281464 0.62984657 0.46538511\n",
+      " 0.84092615 0.38056331 0.21669412 0.44118415 0.65537459 0.2136067\n",
+      " 0.72679706 0.22969462]\n",
+      "[1]\n"
+     ]
+    }
+   ],
+   "source": [
+    "x, y = sample_points(10)\n",
+    "print x[0]\n",
+    "print y[0]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Single Layer Neural Network"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "For simplicity and better understand, we use a neural network with only single layer for predicting the output. i.e,\n",
+    "\n",
+    "a = np.matmul(X, theta)\n",
+    "\n",
+    "YHat = sigmoid(a)\n",
+    "\n",
+    "\n",
+    "\n",
+    "__*So, we use MAML for finding this optimal parameter value theta that is generalizable across tasks. So that \n",
+    "for a new task, we can learn from a few data points in a lesser time by taking very less gradient steps.*__"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## MAML"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now, we define a class called MAML where we implement the MAML algorithm. In the \\__init__  method we will initialize all the necessary variables. Then we define our sigmoid activation function. Followed by we define our train function. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "You can check the comments written above each line of code for understanding."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "class MAML(object):\n",
+    "    def __init__(self):\n",
+    "        \n",
+    "        #initialize number of tasks i.e number of tasks we need in each batch of tasks\n",
+    "        self.num_tasks = 10\n",
+    "        \n",
+    "        #number of samples i.e number of shots  -number of data points (k) we need to have in each task\n",
+    "        self.num_samples = 10\n",
+    "\n",
+    "        #number of epochs i.e training iterations\n",
+    "        self.epochs = 10000\n",
+    "        \n",
+    "        #hyperparameter for the inner loop (inner gradient update)\n",
+    "        self.alpha = 0.0001\n",
+    "        \n",
+    "        #hyperparameter for the outer loop (outer gradient update) i.e meta optimization\n",
+    "        self.beta = 0.0001\n",
+    "       \n",
+    "        #randomly initialize our model parameter theta\n",
+    "        self.theta = np.random.normal(size=50).reshape(50, 1)\n",
+    "      \n",
+    "    #define our sigmoid activation function  \n",
+    "    def sigmoid(self,a):\n",
+    "        return 1.0 / (1 + np.exp(-a))\n",
+    "    \n",
+    "    \n",
+    "    #now let us get to the interesting part i.e training :P\n",
+    "    def train(self):\n",
+    "        \n",
+    "        #for the number of epochs,\n",
+    "        for e in range(self.epochs):        \n",
+    "            \n",
+    "            self.theta_ = []\n",
+    "            \n",
+    "            #for task i in batch of tasks\n",
+    "            for i in range(self.num_tasks):\n",
+    "               \n",
+    "                #sample k data points and prepare our train set\n",
+    "                XTrain, YTrain = sample_points(self.num_samples)\n",
+    "                \n",
+    "                a = np.matmul(XTrain, self.theta)\n",
+    "\n",
+    "                YHat = self.sigmoid(a)\n",
+    "\n",
+    "                #since we are performing classification, we use cross entropy loss as our loss function\n",
+    "                loss = ((np.matmul(-YTrain.T, np.log(YHat)) - np.matmul((1 -YTrain.T), np.log(1 - YHat)))/self.num_samples)[0][0]\n",
+    "                \n",
+    "                #minimize the loss by calculating gradients\n",
+    "                gradient = np.matmul(XTrain.T, (YHat - YTrain)) / self.num_samples\n",
+    "\n",
+    "                #update the gradients and find the optimal parameter theta' for each of tasks\n",
+    "                self.theta_.append(self.theta - self.alpha*gradient)\n",
+    "                \n",
+    "     \n",
+    "            #initialize meta gradients\n",
+    "            meta_gradient = np.zeros(self.theta.shape)\n",
+    "                        \n",
+    "            for i in range(self.num_tasks):\n",
+    "            \n",
+    "                #sample k data points and prepare our test set for meta training\n",
+    "                XTest, YTest = sample_points(10)\n",
+    "\n",
+    "                #predict the value of y\n",
+    "                a = np.matmul(XTest, self.theta_[i])\n",
+    "                \n",
+    "                YPred = self.sigmoid(a)\n",
+    "                           \n",
+    "                #compute meta gradients\n",
+    "                meta_gradient += np.matmul(XTest.T, (YPred - YTest)) / self.num_samples\n",
+    "\n",
+    "  \n",
+    "            #update our randomly initialized model parameter theta with the meta gradients\n",
+    "            self.theta = self.theta-self.beta*meta_gradient/self.num_tasks\n",
+    "                                       \n",
+    "            if e%1000==0:\n",
+    "                print \"Epoch {}: Loss {}\\n\".format(e,loss)             \n",
+    "                print 'Updated Model Parameter Theta\\n'\n",
+    "                print 'Sampling Next Batch of Tasks \\n'\n",
+    "                print '---------------------------------\\n'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "model = MAML()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Epoch 0: Loss 2.71883405043\n",
+      "\n",
+      "Updated Model Parameter Theta\n",
+      "\n",
+      "Sampling Next Batch of Tasks \n",
+      "\n",
+      "---------------------------------\n",
+      "\n",
+      "Epoch 1000: Loss 1.7829716017\n",
+      "\n",
+      "Updated Model Parameter Theta\n",
+      "\n",
+      "Sampling Next Batch of Tasks \n",
+      "\n",
+      "---------------------------------\n",
+      "\n",
+      "Epoch 2000: Loss 1.29532754055\n",
+      "\n",
+      "Updated Model Parameter Theta\n",
+      "\n",
+      "Sampling Next Batch of Tasks \n",
+      "\n",
+      "---------------------------------\n",
+      "\n",
+      "Epoch 3000: Loss 0.599713728648\n",
+      "\n",
+      "Updated Model Parameter Theta\n",
+      "\n",
+      "Sampling Next Batch of Tasks \n",
+      "\n",
+      "---------------------------------\n",
+      "\n",
+      "Epoch 4000: Loss 2.06254819923\n",
+      "\n",
+      "Updated Model Parameter Theta\n",
+      "\n",
+      "Sampling Next Batch of Tasks \n",
+      "\n",
+      "---------------------------------\n",
+      "\n",
+      "Epoch 5000: Loss 0.878788429216\n",
+      "\n",
+      "Updated Model Parameter Theta\n",
+      "\n",
+      "Sampling Next Batch of Tasks \n",
+      "\n",
+      "---------------------------------\n",
+      "\n",
+      "Epoch 6000: Loss 1.1555853283\n",
+      "\n",
+      "Updated Model Parameter Theta\n",
+      "\n",
+      "Sampling Next Batch of Tasks \n",
+      "\n",
+      "---------------------------------\n",
+      "\n",
+      "Epoch 7000: Loss 0.695896929273\n",
+      "\n",
+      "Updated Model Parameter Theta\n",
+      "\n",
+      "Sampling Next Batch of Tasks \n",
+      "\n",
+      "---------------------------------\n",
+      "\n",
+      "Epoch 8000: Loss 0.528944907272\n",
+      "\n",
+      "Updated Model Parameter Theta\n",
+      "\n",
+      "Sampling Next Batch of Tasks \n",
+      "\n",
+      "---------------------------------\n",
+      "\n",
+      "Epoch 9000: Loss 0.606568408277\n",
+      "\n",
+      "Updated Model Parameter Theta\n",
+      "\n",
+      "Sampling Next Batch of Tasks \n",
+      "\n",
+      "---------------------------------\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "model.train()"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python [default]",
+   "language": "python",
+   "name": "python2"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 2
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython2",
+   "version": "2.7.11"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
