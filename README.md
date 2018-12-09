@@ -110,4 +110,4 @@ Towards the end of the book, we will be familiar with state of the art meta lear
 * 9.4  MIL Algorithm
 * 9.5. CACTUs
 * 9.6. Task Generation using CACTUs
-* 9.7. Learning to Learn in the Concept Space
+* 9.7. Learning to Learn in the Concept Space 
