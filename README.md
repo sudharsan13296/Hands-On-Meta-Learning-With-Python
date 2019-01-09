@@ -10,11 +10,11 @@
   <img src="https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/blob/master/Images/hands-on%20meta%20learning%20sudharsan.png" alt="Book Cover" width="250" align="left"/>
 </a>
 
+Meta learning is an exciting research trend in machine learning, which enables a model to understand the learning process. Unlike other ML paradigms, with meta learning you can learn from small datasets faster.
 
-Meta learning is an exhilarating research in machine learning which enables the model to learn the learning process. Unlike other ML paradigms, with meta learning, we can learn from smaller datasets in a significantly less amount of time. Also, meta learning takes us a step closer towards artificial general intelligence.
+Hands-On Meta Learning with Python starts by explaining the fundamentals of meta learning and helps you understand the concept of learning to learn. You will delve into various one-shot learning algorithms, like siamese, prototypical, relation and memory-augmented networks by implementing them in TensorFlow and Keras. As you make your way through the book, you will dive into state-of-the-art meta learning algorithms such as MAML, Reptile, and CAML. You will then explore how to learn quickly with Meta-SGD and discover how you can perform unsupervised learning using meta learning with CACTUs. In the concluding chapters, you will work through recent trends in meta learning such as adversarial meta learning, task agnostic meta learning, and meta imitation learning.
 
-The book starts with explaining the fundamentals of meta learning and takes the readers to understand the concept of learning to learn. We will learn various one-shot learning algorithms like Siamese, prototypical, relation and memory-augmented networks by implementing them in TensorFlow and Keras. Going ahead we will dive into state of the art meta learning algorithms like MAML, Reptile, CAML and more. We will then explore how to learn quickly with meta SGD and how can we perform unsupervised learning using meta learning. We will also learn about recent trends in meta learning like adversarial meta learning, meta learning by Baldwin effect, continuous adaptation with meta learning, and many more.
-
+By the end of this book, you will be familiar with state-of-the-art meta learning algorithms and able to enable human-like cognition for your machine learning models.
 
 ## Get the book 
 <div>
