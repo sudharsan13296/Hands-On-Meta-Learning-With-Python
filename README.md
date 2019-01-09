@@ -16,6 +16,33 @@ Meta learning is an exhilarating research in machine learning which enables the 
 The book starts with explaining the fundamentals of meta learning and takes the readers to understand the concept of learning to learn. We will learn various one-shot learning algorithms like Siamese, prototypical, relation and memory-augmented networks by implementing them in TensorFlow and Keras. Going ahead we will dive into state of the art meta learning algorithms like MAML, Reptile, CAML and more. We will then explore how to learn quickly with meta SGD and how can we perform unsupervised learning using meta learning. We will also learn about recent trends in meta learning like adversarial meta learning, meta learning by Baldwin effect, continuous adaptation with meta learning, and many more.
 
 
+## Get the book 
+<div>
+<a target="_blank" href="https://www.oreilly.com/library/view/hands-on-meta-learning/9781789534207/"> 
+   <img src="./Images/Oreilly_safari_logo.png" alt="Oreilly Safari" hieght=150, width=150>
+</a>
+  
+<a target="_blank" href="https://www.amazon.com/Hands-Meta-Learning-Python-algorithms-ebook/dp/B07KJJHYKF">
+  <img src="./Images/amazon_logo.jpg" alt="Amazon" >
+</a>
+
+<a target="_blank" href="https://www.packtpub.com/big-data-and-business-intelligence/hands-meta-learning-python">
+  <img src="./Images/packt_logo.jpeg" alt="Packt" hieght=150, width=150 >
+</a>
+
+<a target="_blank" href="https://books.google.co.in/books?id=yx2CDwAAQBAJ&dq=Hands-On+Meta+Learning+with+Python&source=gbs_navlinks_s">
+  <img src="./Images/googlebooks_logo.png" alt="Google Books" 
+</a>
+
+<a target="_blank" href="https://play.google.com/store/books/details/Sudharsan_Ravichandiran_Hands_On_Meta_Learning_wit?id=yx2CDwAAQBAJ">
+  <img src="./Images/googleplay_logo.png" alt="google" >
+</a>
+<br>
+</div>
+
+<br>
+
+[For effective reading and better rendering, check all the notebooks here](https://nbviewer.jupyter.org/github/sudharsan13296/Hands-On-Meta-Learning-With-Python/tree/master/)
 
 ### [1. Introduction to Meta Learning](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/tree/master/01.%20Introduction%20to%20Meta%20Learning)
 
