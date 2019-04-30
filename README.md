@@ -42,7 +42,7 @@ By the end of this book, you will be familiar with state-of-the-art meta learnin
 
 <br>
 
-[For effective reading and better rendering, check all the notebooks here](https://nbviewer.jupyter.org/github/sudharsan13296/Hands-On-Meta-Learning-With-Python/tree/master/)
+## Table of contents 
 
 ### [1. Introduction to Meta Learning](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/tree/master/01.%20Introduction%20to%20Meta%20Learning)
 
