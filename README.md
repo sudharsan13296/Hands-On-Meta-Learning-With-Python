@@ -43,7 +43,7 @@ By the end of this book, you will be familiar with state-of-the-art meta learnin
 <br>
 
 
-### Awesome Meta Learning  [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
+### Awesome Meta Learning  ![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)
 
 
 Check the curated list of Meta Learning papers, code, books, blogs, videos, datasets and other resources [here.](https://github.com/sudharsan13296/Awesome-Meta-Learning) 
