@@ -115,7 +115,7 @@ Check the curated list of Meta Learning papers, code, books, blogs, videos, data
 * 6.9. CAML Algorithm
 
 
-### [7. Meta-SGD and Reptile ALgorithms](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/tree/master/07.%20Meta-SGD%20and%20Reptile%20Algorithms)
+### [7. Meta-SGD and Reptile Algorithms](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/tree/master/07.%20Meta-SGD%20and%20Reptile%20Algorithms)
 
 * [7.1. Meta-SGD](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/blob/master/07.%20Meta-SGD%20and%20Reptile%20Algorithms/7.1%20Meta-SGD.ipynb)
 * 7.2. Meta-SGD in Supervised Learning
