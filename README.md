@@ -48,6 +48,9 @@ By the end of this book, you will be familiar with state-of-the-art meta learnin
 
 Check the curated list of Meta Learning papers, code, books, blogs, videos, datasets and other resources [here.](https://github.com/sudharsan13296/Awesome-Meta-Learning) 
 
+
+#### For for updates follow me on Twitter ([@sudharsan13296](https://twitter.com/sudharsan13296)) and on LinkedIn ([Sudharsan Ravichandiran](https://www.linkedin.com/in/sudharsan1396/))
+
 ## Table of contents 
 
 ### [1. Introduction to Meta Learning](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/tree/master/01.%20Introduction%20to%20Meta%20Learning)
