@@ -1,8 +1,9 @@
 # [Hands-On Meta Learning With Python](https://www.amazon.com/Hands-Meta-Learning-Python-algorithms-ebook/dp/B07KJJHYKF/ref=sr_1_1?ie=UTF8&qid=1543222179&sr=8-1&keywords=meta+learning+hands+on)
 
-
+### Read it thoroghly
 ###  Learning to Learn using One-Shot Learning, MAML, Reptile, Meta-SGD and more
-
+Meta learning is an exciting research trend in machine learning, which enables a model to understand the learning process. Unlike other ML paradigms, with meta learning you can learn from small datasets faster.
+ 
 
 
 ## About the book
